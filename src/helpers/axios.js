@@ -1,7 +1,11 @@
 import axios from 'axios'
 import { getBaseUrl } from './'
 
-export default axios.create({
-  baseURL: getBaseUrl(),
-  responseType: 'json',
-})
+export const API = (method, url, data, headers) => {
+  return axios({
+    method,
+    url: `${getBaseUrl()}/${url}`,
+    headers,
+    data,
+  })
+}
