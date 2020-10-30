@@ -1,13 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Button, Form } from 'semantic-ui-react'
 import styles from './login.module.sass'
 import { API } from '../../helpers/axios'
-import { setAuthorizationToken, setToken } from '../../helpers'
+import { setAuthorizationToken, setToken, getToken } from '../../helpers'
 
 const Login = ({ history }) => {
   const [email, setLogin] = useState('')
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
+
+  useEffect(() => {
+    if (getToken()) {
+      history.push('/admin')
+    } 
+  }, [])
 
   function signIn(e) {
     API('POST', 'user/login', { email, password })
